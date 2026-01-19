@@ -63,7 +63,7 @@ df['final_score'] = (alpha * sem_scores) + ((1-alpha) * temp_scores)
 # 6. GENERATE LATEX TABLE
 top_k = df.sort_values(by='final_score', ascending=False).head(5)
 
-print("\n--- COPY THIS INTO YOUR PAPER (TABLE) ---")
+print("\n--- COPY THIS INTO PAPER BY LATEX (TABLE) ---")
 print("\\begin{table}[h!]")
 print("\\centering")
 print("\\caption{Top-5 Retrieved Documents for query: '" + query + "' using TDR}")
