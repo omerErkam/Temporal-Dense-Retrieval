@@ -15,3 +15,9 @@ The system uses a two-stage pipeline:
 ## Installation
 ```bash
 pip install sentence-transformers pandas numpy
+
+## Usage
+This script downloads a subset of the CNN/DailyMail dataset, simulates temporal distribution, and re-ranks results using the TDR framework.
+
+```bash
+python main.py
