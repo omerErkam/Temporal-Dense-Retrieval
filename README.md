@@ -1,23 +1,20 @@
 # Temporal Dense Retrieval (TDR)
 
-**Author:** Ömer Erkam İbiş  
-**Course:** CENG 543 - Information Retrieval (Fall 2025-2026)  
-**Institute:** İzmir Institute of Technology  
+## Project Overview
+Standard dense retrieval models often fail in dynamic environments like news aggregation because they ignore the temporal dimension of a document's relevance, treating outdated and fresh information equally[cite: 9]. This project introduces a Temporal Dense Retrieval (TDR) framework that resolves this by integrating an exponential time-decay function into the semantic similarity score, ensuring fresh content is prioritized without sacrificing underlying semantic understanding[cite: 9].
 
-## Overview
-This project introduces a **Temporal Dense Retrieval** framework that adds a time-decay layer to standard semantic search models. It is designed to prioritize breaking news and recent events in Information Retrieval tasks.
+## Tech Stack
+* **Language:** Python 3.10[cite: 9]
+* **Libraries & Models:** `sentence-transformers`, Sentence-BERT (SBERT), `all-MiniLM-L6-v2`[cite: 9]
+* **Infrastructure:** Google Colab, NVIDIA Tesla T4 GPU[cite: 9]
+* **Dataset:** CNN/DailyMail (500-document subset utilizing a simulated temporal distribution from 2020 to 2025)[cite: 9]
 
 ## Methodology
-The system uses a two-stage pipeline:
-1. **Semantic Retrieval:** Uses `sentence-transformers` (SBERT) to find semantically similar documents.
-2. **Temporal Re-ranking:** Applies an exponential decay function to the similarity scores based on the document's age.
+1. **Semantic Encoding:** A pre-trained SBERT model maps both the user queries and corpus documents into a shared 384-dimensional dense vector space[cite: 9].
+2. **Dense Retrieval:** The baseline topical relevance is calculated by measuring the cosine similarity between the query and document embeddings[cite: 9].
+3. **Temporal Re-ranking:** A temporal decay filter calculates the age of each document in days and applies an exponential decay function to mathematically model the diminishing relevance of older news events[cite: 9].
+4. **Hybrid Score Fusion:** A weighted linear interpolation strategy fuses the semantic and temporal scores into a final ranking metric, allowing the system to adapt to different query intents by adjusting tuning parameters[cite: 9].
 
-## Installation
-```bash
-pip install sentence-transformers pandas numpy
-
-## Usage
-This script downloads a subset of the CNN/DailyMail dataset, simulates temporal distribution, and re-ranks results using the TDR framework.
-
-```bash
-python main.py
+## Results & Evaluation
+* The TDR framework successfully prioritized recent, relevant documents over outdated ones in simulated temporal environments[cite: 9].
+* In a top-5 retrieval test for a specific query, the model effectively recognized the recency of a document, boosting it to the top rank by elevating a base semantic score of 0.171 to a final TDR score of 0.403[cite: 9].
